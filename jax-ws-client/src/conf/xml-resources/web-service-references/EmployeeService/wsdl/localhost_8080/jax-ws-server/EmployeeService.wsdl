@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://localhost:8080/jax-ws-server/services/v1/EmployeeService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="EmployeeService" targetNamespace="http://localhost:8080/jax-ws-server/services/v1/EmployeeService">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost:8080/jax-ws-server/services/v1/EmployeeService" elementFormDefault="unqualified" targetNamespace="http://localhost:8080/jax-ws-server/services/v1/EmployeeService" version="1.0">
+
+  <xs:element name="createEmployee" type="tns:createEmployee"/>
+
+  <xs:element name="createEmployeeResponse" type="tns:createEmployeeResponse"/>
+
+  <xs:element name="getEmployeeList" type="tns:getEmployeeList"/>
+
+  <xs:element name="getEmployeeListResponse" type="tns:getEmployeeListResponse"/>
+
+  <xs:complexType name="getEmployeeList">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="getEmployeeListResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="employee" type="tns:employee"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="employee">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="createEmployee">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="employee" type="tns:employee"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="createEmployeeResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getEmployeeList">
+    <wsdl:part element="tns:getEmployeeList" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createEmployeeResponse">
+    <wsdl:part element="tns:createEmployeeResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createEmployee">
+    <wsdl:part element="tns:createEmployee" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getEmployeeListResponse">
+    <wsdl:part element="tns:getEmployeeListResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="EmployeeServiceImpl">
+    <wsdl:operation name="getEmployeeList">
+      <wsdl:input message="tns:getEmployeeList" name="getEmployeeList">
+    </wsdl:input>
+      <wsdl:output message="tns:getEmployeeListResponse" name="getEmployeeListResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createEmployee">
+      <wsdl:input message="tns:createEmployee" name="createEmployee">
+    </wsdl:input>
+      <wsdl:output message="tns:createEmployeeResponse" name="createEmployeeResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="EmployeeServiceSoapBinding" type="tns:EmployeeServiceImpl">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getEmployeeList">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getEmployeeList">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getEmployeeListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createEmployee">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="createEmployee">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createEmployeeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EmployeeService">
+    <wsdl:port binding="tns:EmployeeServiceSoapBinding" name="EmployeeServiceImplPort">
+      <soap:address location="http://localhost:8080/jax-ws-server/EmployeeService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
